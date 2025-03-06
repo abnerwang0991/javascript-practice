@@ -1,9 +1,9 @@
 const throttle = (callback, cd = 100) => {
     let timer = null
-    return (...args) => {
+    return function(...args) => {
         if(timer) return
+        callback.apply(this, args)
         timer = setTimeout(() => {
-            callback(args)
             timer = null
         }, cd);
     }
